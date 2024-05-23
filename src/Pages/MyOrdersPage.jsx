@@ -39,49 +39,45 @@ export default function MyOrdersPage() {
     let interval = setInterval(() => fetchData(), 5000);
     return () => clearInterval(interval);
   }, [buyerOrders, dateFilter, search]);
-  return (
-    <div className="page">
-      {buyerId ? (
-        <>
-          <SideBar search={true} home={true} dateFilter={true} logout={true} />
-          <Table
-            style={{
-              width: "85%",
-              margin: "auto 30px auto auto",
-              paddingTop: "20px",
-            }}
-            size="small"
-            dataSource={buyerOrders}
-          >
-            <Column title="Book Name" dataIndex="BookName" key="Book Name" />
-            <Column
-              title="Date of Purchase"
-              dataIndex="DateOfPurchase"
-              key="DateOfPurchase"
-            />
-            <Column title="Price (PKR)" dataIndex="BookPrice" key="Price" />
-            <Column title="Quantity" dataIndex="Quantity" key="quantity" />
-            <Column
-              title="Total (PKR)"
-              render={(record) => record.BookPrice * record.Quantity}
-              sorter={(firstPrice, secondPrice) =>
-                firstPrice === secondPrice
-                  ? 0
-                  : firstPrice > secondPrice
-                  ? 1
-                  : -1
-              }
-            />
-          </Table>
-        </>
-      ) : (
-        <p>
-          Please login to your account
-          <Typography.Link>
-            <Link to="/login"> Login</Link>
-          </Typography.Link>
-        </p>
-      )}
-    </div>
-  );
+  if (buyerId) {
+    return (
+      <div className="page">
+        <SideBar search={true} home={true} dateFilter={true} logout={true} />
+        <Table
+          style={{
+            width: "85%",
+            margin: "auto 30px auto auto",
+            paddingTop: "20px",
+          }}
+          size="small"
+          dataSource={buyerOrders}
+        >
+          <Column title="Book Name" dataIndex="BookName" key="Book Name" />
+          <Column
+            title="Date of Purchase"
+            dataIndex="DateOfPurchase"
+            key="DateOfPurchase"
+          />
+          <Column title="Price (PKR)" dataIndex="BookPrice" key="Price" />
+          <Column title="Quantity" dataIndex="Quantity" key="quantity" />
+          <Column
+            title="Total (PKR)"
+            render={(record) => record.BookPrice * record.Quantity}
+            sorter={(firstPrice, secondPrice) =>
+              firstPrice === secondPrice ? 0 : firstPrice > secondPrice ? 1 : -1
+            }
+          />
+        </Table>
+      </div>
+    );
+  } else {
+    return (
+      <p>
+        Please login to your account
+        <Typography.Link>
+          <Link to="/login"> Login</Link>
+        </Typography.Link>
+      </p>
+    );
+  }
 }
