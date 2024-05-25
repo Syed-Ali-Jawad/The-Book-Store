@@ -44,8 +44,6 @@ export default function BooksEntriesCard({ book }) {
         cover={
           <Image
             style={{
-              borderRadius: "50%",
-              border: "1px dashed black",
               width: "100%",
               height: "125px",
             }}
@@ -53,7 +51,7 @@ export default function BooksEntriesCard({ book }) {
           />
         }
       >
-        <Card.Meta style={{ margin: "0 30%" }} title={book.BookName} />
+        <h3 style={{ height: "60px" }}>{book.BookName}</h3>
         <p>Genre: {book.BookGenre}</p>
         <p>Price: Rs {book.Price}</p>
         <p>Sold: {book.Sold}</p>
@@ -62,7 +60,7 @@ export default function BooksEntriesCard({ book }) {
           Quantity:
           <InputNumber
             onChange={(value) => setBooksQuantity(value)}
-            style={{ width: "50px" }}
+            style={{ width: "45px" }}
             defaultValue={1}
           />
         </p>
